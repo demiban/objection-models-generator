@@ -1,0 +1,14 @@
+
+{%- for column in table.columns %}
+  {{ ( ("readonly " if column.isPrimaryKey) + (column.name | camelCase) + ("!" if column.notNull) + ("?" if not column.notNull) ) + ":" | fill(5) }} {{ (jsTypes[column.type.name] + ("[]".repeat(column.arrayDimension))) | replace("undefined", "string") }};
+{%- endfor %}
+
+{%- for relation in table.m2oRelations %}
+  {{ (relation.name | camelCase) + "?:" | fill(5) }}  {{ "models." + relation.targetTable | dboClassName(addSchemaName)}};
+{%- endfor %}
+{%- for relation in table.o2mRelations %}
+  {{ relation.name | camelCase | plural + "?:" | fill(5) }} {{ "models." + (relation.targetTable | dboClassName(addSchemaName) + "[]") }};
+{%- endfor %}
+{%- for relation in table.m2mRelations %}
+  {{ relation.name | camelCase | plural + "?:" | fill(5) }} {{ "models." + (relation.targetTable | dboClassName(addSchemaName) + "[]") }};
+{%- endfor %}

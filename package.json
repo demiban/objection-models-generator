@@ -1,0 +1,42 @@
+{
+  "name": "objection-models-generator",
+  "version": "0.1.0",
+  "description": "",
+  "author": "Demiban Diaz",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "prebuild": "rimraf dist && cpy '**/*.njk' --cwd=src --no-overwrite --parents ../dist/templates",
+    "build": "yarn prebuild && tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "check:dep": "yarn check-dep"
+  },
+  "dependencies": {
+    "pg": "^8.3.0",
+    "rimraf": "^3.0.2",
+    "rxjs": "^6.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.37",
+    "@types/nodemailer": "^6.4.0",
+    "@types/nunjucks": "^3.1.4",
+    "@types/pg": "^7.14.11",
+    "@typescript-eslint/eslint-plugin": "^4.21.0",
+    "@typescript-eslint/parser": "^4.21.0",
+    "cpy-cli": "^3.1.1",
+    "eslint": "^7.24.0",
+    "eslint-config-prettier": "8.1.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-prettier": "^3.3.1",
+    "nunjucks": "^3.2.3",
+    "pg-generator": "5.0.0-alpha.9",
+    "pg-structure": "^7.12.1",
+    "prettier": "^2.2.1",
+    "ts-jest": "^26.5.4",
+    "ts-loader": "^8.1.0",
+    "ts-node": "^9.1.1",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^3.9.7"
+  }
+}
